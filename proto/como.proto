@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package como;
+
+import "buf/validate/validate.proto";
+
+option go_package = "./proto";
+option java_multiple_files = true;
+option java_outer_classname = "Auth";
+option java_package = "host.lost.como.proto";
+
+message AuthRequest {
+  string username = 1 [(buf.validate.field).string = {
+    pattern: "^[a-zA-Z0-9]*$",
+    min_len: 1,
+    max_len: 32
+  }];
+  string password = 2 [(buf.validate.field).string = {
+    pattern: "^[a-zA-Z0-9]*$",
+    min_len: 8,
+    max_len: 64
+  }];
+}
+
+message AuthResponse {
+  string token = 1;
+}
+
+service Como {
+  rpc Login(AuthRequest) returns (AuthResponse) {}
+  rpc Register(AuthRequest) returns (AuthResponse) {}
+}

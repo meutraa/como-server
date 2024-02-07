@@ -1,0 +1,3 @@
+[submodule "vendor/protoc-gen-validate"]
+	path = vendor/protoc-gen-validate
+	url = https://github.com/envoyproxy/protoc-gen-validate.git
